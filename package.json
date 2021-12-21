@@ -7,7 +7,7 @@
     "url": "git+https://github.com/xoy8n/wetube.git"
   },
   "scripts": {
-    "dev": "nodemon -L --exec babel-node index.js"
+    "dev": "nodemon --delay 2s -L --exec babel-node src/server.js"
   },
   "author": "xoy8n<s01057111917@gmail.com>",
   "license": "ISC",
