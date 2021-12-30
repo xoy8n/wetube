@@ -1,15 +1,36 @@
-export const trending = (req, res) => res.send("Home page videos");
-export const see = (req, res) => {
-  console.log(req.params);
-  return res.send(`Watch Video #${req.params.id}`);
-}; //{id : '121212'}
-// express는 내가 고른 이름과 함께 값을 제공해줌
-export const edit = (req, res) => {
-  return res.send("Edit");
+export const trending = (req, res) => {
+  const videos = [
+    {
+      title: "First Video",
+      rating: 5,
+      comments: 2,
+      createdAT: "2 minutes ago",
+      view: 59,
+      id: 1,
+    },
+    {
+      title: "Second Video",
+      rating: 5,
+      comments: 2,
+      createdAT: "2 minutes ago",
+      view: 59,
+      id: 1,
+    },
+    {
+      title: "Third Video",
+      rating: 5,
+      comments: 2,
+      createdAT: "2 minutes ago",
+      view: 59,
+      id: 1,
+    },
+  ];
+  return res.render("home", { pageTitle: "Home", videos });
 };
+export const see = (req, res) => res.render("watch");
+export const edit = (req, res) => res.render("edit");
 export const search = (req, res) => res.send("Search");
 export const upload = (req, res) => res.send("Upload");
 export const deleteVideo = (req, res) => {
-  console.log(req.params);
   return res.send("Delete Video");
 };
