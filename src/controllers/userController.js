@@ -1,7 +1,6 @@
 import User from "../models/User";
 import fetch from "node-fetch";
 import bcrypt from "bcrypt";
-import { token } from "morgan";
 
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
 export const postJoin = async (req, res) => {
@@ -112,6 +111,7 @@ export const finishGithubLogin = async (req, res) => {
       (email) => email.primary === true && email.verified === true
     );
     if (!emailObj) {
+      // set notification
       return res.redirect("/login");
     }
     let user = await User.findOne({ email: emailObj.email });
@@ -126,6 +126,8 @@ export const finishGithubLogin = async (req, res) => {
         location: userData.location,
       });
     }
+    //세션에 정보 추가
+    // session 설정 된 후라 쓸 수 있음
     req.session.loggedIn = true;
     req.session.user = user;
     return res.redirect("/");
@@ -133,10 +135,55 @@ export const finishGithubLogin = async (req, res) => {
     return res.redirect("login");
   }
 };
+
+export const getEdit = (req, res) => {
+  return res.render("edit-profile", { pageTitle: "Edit-profile" });
+};
+
+export const postEdit = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+      //model instance생성 시 _id 자동으로 생성
+    },
+    body: { email, username, name, location },
+  } = req;
+
+  //db에서 기존 data와 겹치는거 없는지
+  const existUsername = await User.exists({ username });
+  const existEmail = await User.exists({ email });
+  const pageTitle = "Edit-profile";
+  if (username !== req.session.user.username) {
+    if (existUsername)
+      return res
+        .status(400)
+        .render("edit-profile", { pageTitle, errorMessage: "Exits username" });
+  }
+  if (email !== req.session.user.email) {
+    if (existEmail)
+      return res
+        .status(400)
+        .render("edit-profile", { pageTitle, errorMessage: "Exits  email" });
+  }
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      email,
+      name,
+      username,
+      location,
+    },
+    { new: true }
+  );
+  req.session.user = updatedUser;
+  return res.redirect("/users/edit-profile");
+};
+
+export const edit = (req, res) => res.render("edit");
+
 export const logout = (req, res) => {
   req.session.destroy();
   return res.redirect("/");
 };
-export const edit = (req, res) => res.send("Edit User");
 
 export const see = (req, res) => res.send("See User");

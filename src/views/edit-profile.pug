@@ -1,0 +1,10 @@
+extends base
+
+block content
+    em=errorMessage
+    form(method="POST")
+        input(placeholder="이름",name="name", type="text", required, value=loggedInUser.name)
+        input(placeholder="이메일",name="email", type="email", required,value=loggedInUser.email)
+        input(placeholder="아이디",name="username", type="text", required,value=loggedInUser.username)
+        input(placeholder="주소",name="location", type="text", required,value=loggedInUser.location)
+        input(type="submit", value="Update Profile")
