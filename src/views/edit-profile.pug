@@ -8,3 +8,6 @@ block content
         input(placeholder="아이디",name="username", type="text", required,value=loggedInUser.username)
         input(placeholder="주소",name="location", type="text", required,value=loggedInUser.location)
         input(type="submit", value="Update Profile")
+        if !loggedInUser.socailOnly
+            hr
+            a(href="change-password") Change Password &rarr;
