@@ -132,8 +132,13 @@ export const finishGithubLogin = async (req, res) => {
     req.session.user = user;
     return res.redirect("/");
   } else {
-    return res.redirect("login");
+    return res.redirect("/login");
   }
+};
+
+export const logout = (req, res) => {
+  req.session.destroy();
+  return res.redirect("/");
 };
 
 export const getEdit = (req, res) => {
@@ -143,11 +148,13 @@ export const getEdit = (req, res) => {
 export const postEdit = async (req, res) => {
   const {
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
       //model instance생성 시 _id 자동으로 생성
     },
     body: { email, username, name, location },
+    file,
   } = req;
+  // console.log(file);
 
   //db에서 기존 data와 겹치는거 없는지
   const existUsername = await User.exists({ username });
@@ -168,6 +175,7 @@ export const postEdit = async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
+      avatarUrl: file ? file.path : avatarUrl,
       email,
       name,
       username,
@@ -176,14 +184,7 @@ export const postEdit = async (req, res) => {
     { new: true }
   );
   req.session.user = updatedUser;
-  return res.redirect("/users/edit-profile");
-};
-
-export const edit = (req, res) => res.render("edit");
-
-export const logout = (req, res) => {
-  req.session.destroy();
-  return res.redirect("/");
+  return res.redirect("/users/edit");
 };
 
 export const getChangePassword = (req, res) => {
@@ -200,7 +201,8 @@ export const postChangePassword = async (req, res) => {
     body: { oldPassword, newPassword, newPasswordConfirmation },
   } = req;
   // 기존 비밀번호 일치 확인
-  const ok = await bcrypt.compare(oldPassword, password);
+  const user = await User.findById(_id);
+  const ok = await bcrypt.compare(oldPassword, user.password);
   if (!ok) {
     return res.status(400).render("users/change-password", {
       pageTitle: "Change Password",
