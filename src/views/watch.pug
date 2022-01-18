@@ -1,9 +1,10 @@
-extends base.pug
+extends base
 
-block content    
+block content
+    video(src="/" + video.fileUrl, controls)
     div
         p=video.description
         small=video.createdAt
-    a(href=`${video.id}/edit`) Edit video &rarr;
+    a(href=`${video.id}/edit`) Edit Video &rarr;
     br
-    a(href=`${video.id}/delete`) Delete video &rarr;
+    a(href=`${video.id}/delete`) Delete Video &rarr;

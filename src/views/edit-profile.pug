@@ -3,13 +3,13 @@ extends base
 block content
     img(src="/" + loggedInUser.avatarUrl, width="100", height="100")
     form(method="POST", enctype="multipart/form-data")
-        label(for="avatar") Avatar
+        label(for="avatar") 프로필
         input(type="file", id="avatar", name="avatar", accept="image/*")
         input(placeholder="이름",name="name", type="text", required, value=loggedInUser.name)
         input(placeholder="이메일",name="email", type="email", required,value=loggedInUser.email)
         input(placeholder="아이디",name="username", type="text", required,value=loggedInUser.username)
         input(placeholder="주소",name="location", type="text", required,value=loggedInUser.location)
-        input(type="submit", value="Update Profile")
+        input(type="submit", value="프로필 업데이트")
         if !loggedInUser.socailOnly
             hr
-            a(href="change-password") Change Password &rarr;
+            a(href="change-password") 비밀번호 변경 &rarr;

@@ -1,10 +1,12 @@
 extends base.pug
 
-block content   
-    if errorMessage    
+block content
+    if errorMessage
         span=errorMessage
-    form(method="POST")
-        input(placeholder="Title", required, type="text", name="title", maxlength=80)
-        input(placeholder="Description", required, type="text", name="description", minlength=20)
-        input(placeholder="Hashtags, separated by comma", required, type="text", name="hashtags")
-        input(type="submit", value="Upload Video") 
+    form(method="POST", enctype="multipart/form-data")
+        label(for="video") 비디오 파일
+        input(type="file", accept="video/*", required, id="video", name="video")
+        input(placeholder="제목", required, type="text", name="title", maxlength=80)
+        input(placeholder="세부사항", required, type="text", name="description", minlength=20)
+        input(placeholder="해시태그, 쉼표로 나누세요!", required, type="text", name="hashtags")
+        input(type="submit", value="비디오 업로드")
