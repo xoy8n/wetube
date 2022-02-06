@@ -1,5 +1,5 @@
-import User from "../models/User";
-import Video from "../models/Video";
+import User from "../models/User.js";
+import Video from "../models/Video.js";
 import fetch from "node-fetch";
 import bcrypt from "bcrypt";
 
@@ -155,7 +155,6 @@ export const postEdit = async (req, res) => {
     body: { email, username, name, location },
     file,
   } = req;
-  console.log(file);
 
   //db에서 기존 data와 겹치는거 없는지
   const existUsername = await User.exists({ username });
