@@ -6,6 +6,8 @@ block content
         input(placeholder="제목으로 검색하기", name="keyword", type="text")
         input(type="submit", value="검색하기")
 
-    div
+    div.video-grid
         each video in videos 
             +video(video)
+        else
+            span.empty__message 비디오를 찾을 수 없습니다.
