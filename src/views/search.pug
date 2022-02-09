@@ -2,9 +2,11 @@ extends base.pug
 include mixins/video
 
 block content   
-    form(method="GET")
-        input(placeholder="제목으로 검색하기", name="keyword", type="text")
-        input(type="submit", value="검색하기")
+    div.search-box
+        form(method="GET").search-box__form
+            input(placeholder="검색", name="keyword", type="text")
+        button(type="submit")
+            i.fas.fa-search
 
     div.video-grid
         each video in videos 

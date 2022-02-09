@@ -10,6 +10,7 @@
 
 //Screens
 @import "./screens/home.scss";
+@import "./screens/search.scss";
 
 //Defaults
 a {
@@ -24,6 +25,9 @@ body {
   color: white;
 }
 
+header {
+  background-color: $header;
+}
 main {
   max-width: 1200px;
   width: 100%;
