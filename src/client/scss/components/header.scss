@@ -3,6 +3,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: $header;
   .header__logo {
     color: $red;
     font-size: 38px;
@@ -23,7 +24,7 @@ header {
   }
   .header__btn {
     background-color: white;
-    color: $bg;
+    color: $header;
     padding: 5px 10px;
     border-radius: 5px;
   }
