@@ -1,3 +1,3 @@
 import "../scss/style.scss";
 
-//alert("it works!");
+console.log("it's main!");
