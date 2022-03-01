@@ -4,7 +4,8 @@ const videoSchema = new Mongoose.Schema({
   // 이 코드 안에 비디오 형식을 작성
   title: { type: String, required: true, trim: true, maxlength: 80 },
   fileUrl: { type: String, required: true },
-  description: { type: String, required: true, trim: true, minlength: 20 },
+  thumbUrl: { type: String, required: true },
+  description: { type: String, required: true, trim: true, minLength: 2 },
   createdAt: { type: Date, required: true, default: Date.now },
   hashtags: [{ type: String, trim: true }],
   meta: {
