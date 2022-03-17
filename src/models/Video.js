@@ -11,6 +11,9 @@ const videoSchema = new Mongoose.Schema({
   meta: {
     views: { type: Number, default: 0, required: true },
   },
+  comments: [
+    { type: Mongoose.Schema.Types.ObjectId, required: true, ref: "Comment" },
+  ],
   owner: {
     type: Mongoose.Schema.Types.ObjectId,
     required: true,
