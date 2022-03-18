@@ -100,8 +100,8 @@ const handleMouseLeave = () => {
   controlsTimeout = setTimeout(hideControls, 3000);
 };
 
-const handleSpaceBar = (event) => {
-  if (event.key === " ") {
+const handleSpaceBar = (e) => {
+  if (e.target !== textarea && e.keyCode == 32) {
     handlePlayClick();
   }
 };
