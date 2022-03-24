@@ -1,47 +1,63 @@
 extends base
 
 block content
-    div#videoContainer(data-id=video._id)
-        video(src="/" + video.fileUrl)
-        div#videoControls.videoControls
-            div.videoControls__play
-                span#play.videoControls__playBtn
-                    i.fas.fa-play
-                div.videoControls__time
-                    span#currenTime 00:00
-                    span  / 
-                    span#totalTime 00:00
-            input(type="range",step="1", value="0", min="0")#timeline.videoControls__timeline
-            div.videoControls__volume
-                input(type="range",step="0.1", value=0.5, min="0", max="1")#volume
-                span#mute
-                    i.fas.fa-volume-up
-            div
-                span#fullScreen
-                    i.fas.fa-expand
-
+    div.Container
+        div#videoContainer(data-id=video._id)
+            video(src="/" + video.fileUrl)
+            div#videoControls.videoControls
+                div.videoControls__play
+                    span#play.videoControls__playBtn
+                        i.fas.fa-play
+                    div.videoControls__time
+                        span#currenTime 00:00
+                        span  / 
+                        span#totalTime 00:00
+                input(type="range",step="1", value="0", min="0")#timeline.videoControls__timeline
+                div.videoControls__volume
+                    input(type="range",step="0.1", value=0.5, min="0", max="1")#volume
+                    span#mute
+                        i.fas.fa-volume-up
+                div
+                    span#fullScreen
+                        i.fas.fa-expand
+        
+        div.video-right
+            div.video__add-comments
+                form.video__comment-form#commentForm
+                    if !loggedInUser.avatarUrl
+                            span.header__avatar--span 😎
+                    else
+                        img.header__avatar(src="/" + loggedInUser.avatarUrl)
+                    if loggedIn
+                        textarea(id="textarea", cols="50", rows="1", placeholder="댓글 달기...")
+                        button 
+                            i.far.fa-paper-plane
+                    else
+                        a.toLogin(href=`/login/`) 로그인하고 댓글달기 &rarr;
+            div.video__comments
+                ul
+                    each comment in video.comments.reverse()
+                        li.video__comment
+                            i.fas.fa-comment
+                            span  #{comment.text}
+                            if String(comment.owner._id) === String(loggedInUser._id)
+                                span.video__comment-delete(style="cursor:pointer",data-id=comment.id)  ❌
     div.video__data
         p.video__title=video.title
-        small.video__owner Uploaded by 
-            a(href=`/users/${video.owner._id}`)=video.owner.name
-        small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
-        if String(video.owner._id) === String(loggedInUser._id)
-            a(href=`${video.id}/edit`) Edit Video &rarr;
-            br
-            a(href=`${video.id}/delete`) Delete Video &rarr;
-    if loggedIn
-        div.video__add-comments
-            form.video__comment-form#commentForm
-                textarea(id="textarea", cols="30", rows="10", placeholder="Write a nice commment...")
-                button Add Comment
-    div.video__comments
-        ul
-            each comment in video.comments.reverse()
-                li.video__comment
-                    i.fas.fa-comment
-                    span  #{comment.text}
-                    if String(comment.owner._id) === String(loggedInUser._id)
-                        span.video__comment-delete(style="cursor:pointer",data-id=comment.id)  ❌
+        div.video__description
+            small.video__views 조회수 #{video.meta.views} 회  · 
+            small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+        div.video__owner
+            div.video__owner-link
+                a(href=`/users/${video.owner._id}`)
+                    img.header__avatar(src="/" + video.owner.avatarUrl)
+                a(href=`/users/${video.owner._id}`)=video.owner.name
+            div.video__owner-edit
+                if String(video.owner._id) === String(loggedInUser._id)
+                    a.editlink(href=`${video.id}/edit`) 영상 수정하기 &rarr;
+                    br
+                    a(href=`${video.id}/delete`) 영상 삭제하기 &rarr;
+    
 
 
 block scripts

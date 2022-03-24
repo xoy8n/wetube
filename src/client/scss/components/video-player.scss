@@ -1,7 +1,14 @@
+.Container {
+  display: flex;
+}
 #videoContainer {
   width: 100%;
   position: relative;
+  background-color: black;
+  display: flex;
+  align-items: center;
   video {
+    height: 60vh;
     width: 100%;
   }
   .videoControls {
