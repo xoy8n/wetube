@@ -33,7 +33,7 @@ block content
                         button 
                             i.far.fa-paper-plane
                     else
-                        a.toLogin(href=`/login/`) 로그인하고 댓글달기 &rarr;
+                        textarea(id="textarea", cols="50", rows="1", placeholder="로그인하고 댓글달기")
             div.video__comments
                 ul
                     each comment in video.comments.reverse()

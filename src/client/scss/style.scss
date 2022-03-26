@@ -1,6 +1,7 @@
 // Config
 @import "./config/_variables.scss";
 @import "./config/_reset.scss";
+@import "./config/_mixin.scss";
 
 //Components
 @import "./components/header.scss";
@@ -37,7 +38,16 @@ main {
   margin: 0 auto;
   margin-top: 50px;
 }
-
+@include tablet {
+  main {
+    max-width: 800px;
+  }
+}
+@include mobile {
+  main {
+    max-width: 500px;
+  }
+}
 @keyframes goAway {
   from {
     transform: none;

@@ -4,9 +4,10 @@
 #videoContainer {
   width: 100%;
   position: relative;
-  background-color: black;
   display: flex;
+  z-index: 1;
   align-items: center;
+  background-color: black;
   video {
     height: 60vh;
     width: 100%;
