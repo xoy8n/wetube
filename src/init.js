@@ -1,5 +1,6 @@
 //모든 것을 초기화 시켜줌
 //dotenv/config
+import "regenerator-runtime";
 import "dotenv/config";
 import "./db.js";
 import "./models/Video.js";

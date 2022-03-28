@@ -2,12 +2,13 @@
   "name": "wetube",
   "version": "1.0.0",
   "description": "The Best way to watch videos.",
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xoy8n/wetube.git"
   },
   "scripts": {
+    "start": "node build/init.js",
+    "build:server": "babel src -d build",
     "dev:server": "nodemon",
     "dev:assets": "webpack"
   },
@@ -34,7 +35,8 @@
     "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.5",
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
     "@babel/node": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
     "babel-loader": "^8.2.3",
