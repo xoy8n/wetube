@@ -105,6 +105,11 @@
     }
   }
 }
+@include tablet {
+  .videoControls__time {
+    display: none;
+  }
+}
 
 .video-right::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
