@@ -1,11 +1,13 @@
 mixin video(video)
-    a(href=`/videos/${video.id}`).video-mixin
-        div.video-mixin__thumb
-            img(src=video.thumbUrl crossorigin style=`background-size:cover;background-position:center;width:100%;height:100%;object-fit:cover`)
-        div.video-mixin__data
-            div.video-mixin__row
-                img.header__avatar(src=video.owner.avatarUrl, crossorigin)
-                p.video-mixin__title=video.title
-            div.video-mixin__meta
-                span #{video.owner.name} · 
-                span 조회수 #{video.meta.views} 회
+    div.video-mixin
+        a(href=`/videos/${video.id}`)
+            div.video-mixin__thumb
+                img(src=video.thumbUrl crossorigin style=`background-size:cover;background-position:center;width:100%;height:100%;object-fit:cover`)
+        a(href=`/users/${video.owner._id}`)
+            div.video-mixin__data
+                div.video-mixin__row
+                    img.header__avatar(src=video.owner.avatarUrl, crossorigin)
+                    p.video-mixin__title=video.title
+                div.video-mixin__meta
+                    span #{video.owner.name} · 
+                    span 조회수 #{video.meta.views} 회
