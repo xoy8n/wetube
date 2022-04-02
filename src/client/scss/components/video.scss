@@ -1,18 +1,8 @@
 // video mixin
 .video-mixin {
   .video-mixin__thumb {
-    height: 140px;
-    width: 100%;
     background-color: ivory;
   }
-  @include mobile {
-    .video-mixin__thumb {
-      height: 220px;
-      width: 100%;
-      background-color: ivory;
-    }
-  }
-
   .video-mixin__data {
     //padding: 0px 15px;
     .video-mixin__row {
